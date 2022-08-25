@@ -127,3 +127,71 @@ def game_hash
 end
 
 # Write code here
+home_players = game_hash[:home][:players]
+away_players = game_hash[:away][:players]
+
+$all_players = home_players.concat(away_players)
+
+
+def num_points_scored player
+  player_info = $all_players.find do |players|
+    players[:player_name] == player
+  end
+  player_info[:points]
+end
+
+def shoe_size player
+  player_info = $all_players.find do |players|
+    players[:player_name] == player
+  end
+  player_info[:shoe]
+end
+
+def team_colors team
+  if team == "Brooklyn Nets"
+    game_hash[:home][:colors]
+  else
+    game_hash[:away][:colors]
+  end
+end
+
+def team_colors team
+  if team == "Brooklyn Nets"
+    game_hash[:home][:colors]
+  else
+    game_hash[:away][:colors]
+  end
+end
+
+def team_names
+  teams = [game_hash[:home][:team_name], game_hash[:away][:team_name]]  
+  teams
+end
+
+def player_numbers team
+  team_numbers = []
+  if team == "Brooklyn Nets"
+    game_hash[:home][:players].each do |players|
+      team_numbers << players[:number]
+    end
+  else 
+    game_hash[:away][:players].each do |players|
+      team_numbers << players[:number]
+    end
+  end 
+  team_numbers
+end
+
+def player_stats player
+  player_info = $all_players.find do |players|
+    players[:player_name] == player
+  end
+  player_info
+end
+
+def big_shoe_rebounds
+  biggest_shoe = $all_players.sort do |user1, user2|
+    user2[:shoe] <=> user1[:shoe]
+  end
+  biggest_shoe[0][:rebounds]
+end
