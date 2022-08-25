@@ -190,8 +190,42 @@ def player_stats player
 end
 
 def big_shoe_rebounds
-  biggest_shoe = $all_players.sort do |user1, user2|
-    user2[:shoe] <=> user1[:shoe]
+  biggest_shoe = $all_players.sort do |player1, player2|
+    player2[:shoe] <=> player1[:shoe]
   end
   biggest_shoe[0][:rebounds]
 end
+
+def most_points_scored 
+  most_points = $all_players.sort do |player1, player2|
+    player2[:points] <=> player1[:points]
+  end
+  most_points[0][:player_name]
+end
+
+def winning_team 
+  home_points = 0
+  away_points = 0
+
+  game_hash[:home][:players].each do |players|
+    home_points = home_points + players[:points]    
+  end
+
+  game_hash[:away][:players].each do |players|
+    away_points = away_points + players[:points] 
+  end
+
+  if home_points > away_points
+    return game_hash[:home][:team_name]
+  else 
+    return game_hash[:away][:team_name]
+  end
+end
+
+def player_with_longest_name 
+  longest_name = $all_players.sort do |player1, player2|
+    player2[:player_name].length <=> player1[:player_name].length
+  end
+  longest_name[0][:player_name]
+end
+
